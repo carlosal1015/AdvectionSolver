@@ -1,7 +1,6 @@
-//A program to solve the 1D linear advection equation with different methods and slope/flux limiters
+// A program to solve the 1D linear advection equation with different methods and slope/flux limiters
 #include "simulation.h"
 #include "fluxes.h"
-
 
 int main()
 {
@@ -48,5 +47,4 @@ int main()
     cout << "----van-Leer----" << endl;
     vl.iterate("van_leer", 4.0);
     vl.save_data("../../data/vL.txt");
-
 }
