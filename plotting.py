@@ -2,9 +2,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def load_data(data_path, sources):
+def load_data(data_path, sources):
     x_lst = []
     u_lst = []
     for source in sources:
+        x, u = np.loadtxt(data_path + source, skiprows=1, delimiter= ',', unpack = True)
         x, u = np.loadtxt(data_path + source, skiprows=1, delimiter= ',', unpack = True)
         x_lst.append(x)
         u_lst.append(u)
@@ -28,6 +30,7 @@ def main():
     data_path = 'data/'
     out_dir = 'results/'
     sources = ['analytical.txt', 'upwind.txt', 'lax.txt', 'beam.txt', 'fromm.txt', 'minmod.txt', 'sb.txt', 'mc.txt', 'vL.txt']
+    x_lst, u_lst = load_data(data_path, sources)
     x_lst, u_lst = load_data(data_path, sources)
 
     labels = ['Upwind', 'Lax-Wendroff', 'Beam-Warming', 'Fromm', 'MinMod', 'SuperBee', 'MC', 'van-Leer']
