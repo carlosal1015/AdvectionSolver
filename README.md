@@ -3,7 +3,9 @@ This code solves the 1D advection equation using a finite volume approach. It us
 
 ## Features
 -Switching between different Slope- and Fluxlimiters to get an easy side to side comparison of the methods used. 
+
 -Adjustments of simulation parameters like gridsize and courant number to see their effect on the quality of the solution.
+
 -Periodic boundary conditions and a test problem that includes discontinuities as well as a wave.
 
 ## Slope- and Fluxlimiters
