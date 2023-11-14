@@ -29,6 +29,33 @@ simulation::simulation(double sigma, int grid_len) : fluxes()
     }
 }
 
+simulation::simulation(double sigma, vector<double> start_dist) : fluxes()
+{
+    // set q(x, t=0)
+    this->u = start_dist;
+    this->M = start_dist.size() + 4; // length of grid +2 borders on each side
+    u.insert(u.begin(), 2, 0.0);
+    u.push_back(0.0);
+    u.push_back(0.0);
+
+    this->sigma = sigma;
+    this->delta_x = 2.0 / double(u.size());
+    delta_t = this->sigma * this->delta_x;
+
+    // initialize other grid quantities and fill ghost cells
+    this->slope = vector<double>(this->M, 0.0);
+    this->flux = vector<double>(this->M, 0.0);
+    bord_con(); // fill ghost cells
+
+    // print dist
+    /*
+    for (unsigned int i = 0; i < u.size(); i++)
+    {
+        cout << i << " " << u[i] << endl;
+    }
+    */
+}
+
 void simulation::print_att()
 {
     // method to print relevant attributes of current class
