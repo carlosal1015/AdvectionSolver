@@ -48,41 +48,24 @@ void simulation::iterate(string iterator, double t_end)
     double t = 0.0;
     vector<double> u_new = u;
     bool is_known_iterator = true;
+    map<string, void (simulation::*)(vector<double>)> schemes = {
+        {"upwind", &simulation::upwind},
+        {"lax_wendroff", &simulation::lax_wendroff},
+        {"beam_warming", &simulation::beam_warming},
+        {"fromm", &simulation::fromm},
+        {"minmod", &simulation::minmod},
+        {"superbee", &simulation::superbee},
+        {"mc", &simulation::mc},
+        {"van_leer", &simulation::van_leer}};
+    map<string, void (simulation::*)(vector<double>)>::iterator it;
+    it = schemes.find(iterator);
     // declare pointer-to-member-function to avoid having to put the iterator cases inside the loop
     void (simulation::*funcptr)(vector<double>) = nullptr;
-    if (iterator == "upwind")
+    if (it != schemes.end()) // searched key exists
     {
-        funcptr = &simulation::upwind;
+        funcptr = it->second;
     }
-    else if (iterator == "lax_wendroff")
-    {
-        funcptr = &simulation::lax_wendroff;
-    }
-    else if (iterator == "beam_warming")
-    {
-        funcptr = &simulation::beam_warming;
-    }
-    else if (iterator == "fromm")
-    {
-        funcptr = &simulation::fromm;
-    }
-    else if (iterator == "minmod")
-    {
-        funcptr = &simulation::minmod;
-    }
-    else if (iterator == "superbee")
-    {
-        funcptr = &simulation::superbee;
-    }
-    else if (iterator == "mc")
-    {
-        funcptr = &simulation::mc;
-    }
-    else if (iterator == "van_leer")
-    {
-        funcptr = &simulation::van_leer;
-    }
-    else
+    else // key doesn't exist
     {
         cout << "Unknown iterator!";
         is_known_iterator = false;

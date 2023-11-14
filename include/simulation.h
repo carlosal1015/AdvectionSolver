@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <map>
 #include "fluxes.h"
 using namespace std;
 
