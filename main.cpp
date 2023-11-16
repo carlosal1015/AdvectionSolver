@@ -6,8 +6,9 @@
 int main()
 {
     vector<double> dist;
-    dist = loadFromTxt("../../inputDist.txt");
-    simulation Test(0.8, dist);
+    dist = loadFromTxt("../../customDist.txt");
+    simulation Test(0.8, 0.0, 2.0, dist);
+
     Test.iterate("upwind", 4.0);
     Test.save_data("../../data/testupwind.txt");
 
