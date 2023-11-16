@@ -1,9 +1,17 @@
 // A program to solve the 1D linear advection equation with different methods and slope/flux limiters
 #include "simulation.h"
 #include "fluxes.h"
+#include "loadData.h"
 
 int main()
 {
+    vector<double> dist;
+    dist = loadFromTxt("../../customDist.txt");
+    simulation custom(0.8, 0.0, 2.0, dist);
+    custom.save_data("../../data/custom_analytical.txt");
+    custom.iterate("upwind", 4.0);
+    custom.save_data("../../data/custom_upwind.txt");
+
     simulation Ana(0.8, 400);
     cout << "Generation analytical solution!" << endl;
     Ana.save_data("../../data/analytical.txt");

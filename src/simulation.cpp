@@ -4,9 +4,12 @@
 simulation::simulation(double sigma, int grid_len) : fluxes()
 {
     this->sigma = sigma;
+    //choosing default computation domain of [0, 2]
+    this->xmin = -1.0;
     this->delta_x = 2.0 / double(grid_len);
     delta_t = this->sigma * this->delta_x;
     this->M = grid_len + 4; // length of grid +2 borders on each side
+
 
     // initialize grid quantities
     this->u = vector<double>(this->M, 0.0);
@@ -27,6 +30,36 @@ simulation::simulation(double sigma, int grid_len) : fluxes()
         }
         // cout << i << " " << u[i] << endl;
     }
+}
+
+simulation::simulation(double sigma, double xmin, double xmax, vector<double> initialDistribution) : fluxes()
+{
+    // set simualtion and fluxes basic attributes
+    this->xmin = xmin;
+    this->sigma = sigma;
+    this->delta_x = (xmax - xmin) / double(initialDistribution.size()-1);
+    this->M = initialDistribution.size() + 4; // length of grid +2 borders on each side
+    // get timestep
+    delta_t = this->sigma * this->delta_x;
+
+    // set q(x, t=0)
+    this->u = initialDistribution;
+    u.insert(u.begin(), 2, 0.0);
+    u.push_back(0.0);
+    u.push_back(0.0);
+
+    // initialize other grid quantities and fill ghost cells
+    this->slope = vector<double>(this->M, 0.0);
+    this->flux = vector<double>(this->M, 0.0);
+    bord_con(); // fill ghost cells
+
+    // print dist
+    /*
+    for (unsigned int i = 0; i < u.size(); i++)
+    {
+        cout << i << " " << u[i] << endl;
+    }
+    */
 }
 
 void simulation::print_att()
@@ -95,7 +128,7 @@ void simulation::save_data(string file_name)
     myfile << M << ", " << sigma << "\n";
     for (size_t i = 2; i < u.size() - 1; ++i)
     {
-        myfile << -1.0 + delta_x * (i - 2) << ", " << u[i] << "\n";
+        myfile << xmin + delta_x * (i - 2) << ", " << u[i] << "\n";
     }
     myfile.close();
     cout << "success!" << endl;

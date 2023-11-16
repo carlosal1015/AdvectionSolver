@@ -6,7 +6,9 @@ This code solves the 1D advection equation using a finite volume approach. It us
 
 -Adjustments of simulation parameters like gridsize and courant number to see their effect on the quality of the solution.
 
--Periodic boundary conditions and a test problem that includes discontinuities as well as a wave.
+-Periodic boundary conditions
+
+-Custom initial conditions q(t=0, x) or a test problem that includes discontinuities as well as a wave.
 
 ## Slope- and Fluxlimiters
 1. Simple Upwind
@@ -19,4 +21,8 @@ This code solves the 1D advection equation using a finite volume approach. It us
 8. VanLeer
 
 ## Code Manual
-The project uses CMake to build. After compilation and execution of the binary, the resulting simulation data can be found in the data dir. Now plotting.py can be run. This generates plots of the numerical versus the analytical solution in the results dir. At the moment there is no easy to use way to change the starting distribution. This will be changed in the future.
+There are three parts to this program. createDist.cpp stands on it's own and can generate a customDistribution as the initial condition for the solver. 
+
+The main simulation uses CMake to build. It includes the main.cpp aswell as the headers and source files in include/ and src/. After compilation and execution of the binary, the resulting simulation data can be found in the data dir. 
+
+Now plotting.py can be run. This generates plots of the numerical versus the analytical solution in the results directory. 
