@@ -15,6 +15,6 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(AdvSolv main.cc
   src/fluxes.cc
-  src/simulation.cc
-  src/loadData.cc)
+  src/loadData.cc
+  src/simulation.cc)
 target_include_directories(AdvSolv PUBLIC "include")
