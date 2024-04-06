@@ -1,4 +1,4 @@
-#include "loadData.h"
+#include "loadData.hh"
 
 std::vector<double> loadFromTxt(const std::string &fileName)
 {

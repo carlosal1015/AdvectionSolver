@@ -1,6 +1,20 @@
-cmake_minimum_required(VERSION 3.9.1)
-project(AdvectionSolver)
+cmake_minimum_required(VERSION 3.20.0)
+project("AdvectionSolver"
+  VERSION 1.0
+  DESCRIPTION "A simple C++ advection solver based on michaelschoellhorn/AdvectionSolver"
+  LANGUAGES CXX)
+
+if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
+  message(FATAL_ERROR "In-source builds are not allowed")
+endif()
+
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-include_directories(AdvectionSolver PUBLIC include)
-add_executable(AdvSolv main.cpp src/fluxes.cpp src/simulation.cpp src/loadData.cpp)
+
+add_executable(AdvSolv main.cc
+  src/fluxes.cc
+  src/simulation.cc
+  src/loadData.cc)
+target_include_directories(AdvSolv PUBLIC "include")
