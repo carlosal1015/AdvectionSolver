@@ -28,7 +28,7 @@ def plot_data(x1, y1, x2, y2, label1, label2, title, out_dir):
 
 
 def main():
-    data_path = "data/"
+    data_path = "build/bin/"
     out_dir = "results/"
     sources = [
         "custom_analytical.txt",

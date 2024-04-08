@@ -9,10 +9,7 @@ fi
 cmake -S . -B build
 cmake --build build
 
-g++ createDist.cc -o createDist
-./createDist
-
-mkdir -p data
+# mkdir -p data
 
 pushd build/bin
 ./AdvSolv
