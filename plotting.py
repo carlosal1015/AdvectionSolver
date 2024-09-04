@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def load_data(data_path, sources):
+def load_data(data_path: str, sources: list):
     x_lst = []
     u_lst = []
     for source in sources:

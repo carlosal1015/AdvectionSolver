@@ -1,5 +1,8 @@
 #include "simulation.hh"
 
+// const double M_PI = std::atan(1.0)*4;
+constexpr double PI = std::numbers::pi;
+
 // constructor for class simulation
 simulation::simulation(double sigma, int grid_len) : fluxes()
 {
@@ -22,7 +25,7 @@ simulation::simulation(double sigma, int grid_len) : fluxes()
       this->u[i] = 1.0;
     }
     if (x > 0.0) {
-      this->u[i] = 0.5 * sin(2.0 * M_PI * x);
+      this->u[i] = 0.5 * sin(2.0 * PI * x);
     }
     // cout << i << " " << u[i] << endl;
   }

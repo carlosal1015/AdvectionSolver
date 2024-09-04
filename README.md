@@ -9,12 +9,12 @@ the 1D adv. eq.
 ## Features
 
 - Switching between different Slope- and Fluxlimiters to get an easy side to
-side comparison of the methods used.
+  side comparison of the methods used.
 - Adjustments of simulation parameters like grid size and Courant number to see
-their effect on the quality of the solution.
+  their effect on the quality of the solution.
 - Periodic boundary conditions.
 - Custom initial conditions $q\left(t=0, x\right)$ or a test problem that includes
-discontinuities as well as a wave.
+  discontinuities as well as a wave.
 
 ## Slope- and Fluxlimiters
 
@@ -41,3 +41,8 @@ can be found in the data dir.
 Now `plotting.py` can be run.
 This generates plots of the numerical versus the analytical solution in the
 results directory.
+
+```
+git clone https://github.com/carlosal1015/AdvectionSolver
+git switch develop
+```
