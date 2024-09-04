@@ -10,10 +10,15 @@ endif()
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_COMPILER "icx") # g++ clang++
 set(CMAKE_CXX_EXTENSIONS OFF)
-# set(CMAKE_HOST_SYSTEM_NAME Windows) # Linux
+set(CMAKE_HOST_SYSTEM_NAME Windows) # Linux
+set(CMAKE_GENERATOR "Ninja" CACHE INTERNAL "" FORCE)
 set(CMAKE_BUILD_TYPE Release)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fsycl -std=c++20")
+# set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lOpenCL -lsycl")
 
 add_executable(createDist createDist.cc)
 

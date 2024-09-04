@@ -11,6 +11,8 @@ if (Test-Path -Path $Folder) {
     conda env create -f environment.yml --prefix .venv
 }
 
-clang-format -style=file:.clang-format -i *.cc
-clang-format -style=file:.clang-format -i include/*.hh
-clang-format -style=file:.clang-format -i src/*.cc
+# clang-format -style=file:.clang-format -i *.cc src/*.cc include/*.hh
+Remove-Item -LiteralPath "$pwd\build" -Force -Recurse
+cmd.exe "/K" '"C:\Program Files (x86)\Intel\oneAPI\setvars.bat" && powershell'
+cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Release
+cmake --build build --target all

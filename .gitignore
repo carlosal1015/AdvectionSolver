@@ -12,7 +12,8 @@ _deps
 build
 *.txt
 data
-results
+#results
 *.out
 .venv
 .ruff_cache
+*.png
