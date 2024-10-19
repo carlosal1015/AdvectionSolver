@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from platform import system
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -28,8 +30,10 @@ def plot_data(x1, y1, x2, y2, label1, label2, title, out_dir):
 
 
 def main():
-    data_path = r".\build\bin\\"
-    # #"build/bin/"
+    if system == "Windows":
+        data_path = r".\build\bin\\"
+    elif system == "Linux":
+        data_path = r"build/bin/"
     out_dir = "results/"
     sources = [
         "custom_analytical.txt",

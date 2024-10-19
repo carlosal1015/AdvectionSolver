@@ -22,7 +22,7 @@ void fluxes::lax_wendroff(std::vector<double> u_new)
 {
   for (int i = 2; i < M - 2; i++) {
     u_new[i] = u[i] - sigma / 2.0 * (u[i + 1] - u[i - 1]) +
-               pow(sigma, 2.0) / 2.0 * (u[i + 1] - 2.0 * u[i] + u[i - 1]);
+               std::pow(sigma, 2.0) / 2.0 * (u[i + 1] - 2.0 * u[i] + u[i - 1]);
   }
   u = u_new;
 }
@@ -57,7 +57,7 @@ void fluxes::minmod(std::vector<double> u_new)
     double num1 = (u[i] - u[i - 1]) / delta_x;
     double num2 = (u[i + 1] - u[i]) / delta_x;
     if ((num1 * num2) > 0.0) {
-      if (abs(num1) < abs(num2)) {
+      if (std::abs(num1) < std::abs(num2)) {
         slope[i] = num1;
       }
       else {
@@ -87,13 +87,13 @@ void fluxes::superbee(std::vector<double> u_new)
     double s2 = 0.0;
     // calculate minmods s1 and s2
     if ((num1 * num2) > 0.0) {
-      if (abs(num1) < abs(2.0 * num2)) {
+      if (std::abs(num1) < std::abs(2.0 * num2)) {
         s1 = num1;
       }
       else {
         s1 = 2.0 * num2;
       }
-      if (abs(2.0 * num1) < abs(num2)) {
+      if (std::abs(2.0 * num1) < std::abs(num2)) {
         s2 = 2.0 * num1;
       }
       else {
@@ -103,7 +103,7 @@ void fluxes::superbee(std::vector<double> u_new)
     // calculate maxmod of s1 and s2
     slope[i] = 0.0;
     if ((s1 * s2) > 0) {
-      if (abs(s1) < abs(s2)) {
+      if (std::abs(s1) < std::abs(s2)) {
         slope[i] = s2;
       }
       else {
@@ -143,7 +143,7 @@ void fluxes::van_leer(std::vector<double> u_new)
   for (int i = 2; i < M - 1; i++) {
     double r = (u[i - 1] - u[i - 2]) /
                (u[i] - u[i - 1] + 1E-16); //+1E-16 to avoid div0
-    double phi = (r + abs(r)) / (1 + abs(r));
+    double phi = (r + std::abs(r)) / (1 + std::abs(r));
     flux[i] = u[i - 1] + 0.5 * (1 - sigma) * (u[i] - u[i - 1]) * phi;
   }
   // now use flux to update q

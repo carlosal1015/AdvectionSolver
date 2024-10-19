@@ -6,6 +6,7 @@ if [ -d "$DIR" ]; then
   rm -rf "$DIR"
 fi
 
+source /opt/intel/oneapi/setvars.sh
 cmake -S . -B build
 cmake --build build
 
