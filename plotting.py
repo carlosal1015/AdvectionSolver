@@ -18,13 +18,31 @@ def load_data(data_path: str, sources: list):
 
 
 def plot_data(x1, y1, x2, y2, label1, label2, title, out_dir):
-    plt.plot(x1, y1, label=label1)
-    plt.plot(x2, y2, label=label2)
-    plt.xlabel(r"Position $x$")
-    plt.ylabel(r"Quantity $Q$")
-    plt.title(label=title)
-    plt.grid()
-    plt.legend()
+    plt.plot(
+        x1,
+        y1,
+        color="blue",
+        label=label1,
+        linewidth=0.5,
+        linestyle="solid",
+    )
+    plt.plot(
+        x2,
+        y2,
+        alpha=0.8,
+        color="red",
+        label=label2,
+        linewidth=0.8,
+        linestyle=":",
+    )
+    plt.xlabel(xlabel=r"Position $x$")
+    plt.ylabel(ylabel=r"Quantity $Q$")
+    plt.xlim(x1[0], x1[-1])
+    plt.ylim(min(y1) - 0.02, max(y2) + 0.02)
+    plt.title(label=title, loc="center")
+    plt.grid(c="gray", linewidth=0.1, linestyle="dashed")
+    plt.legend(loc="best", shadow=True)
+    plt.tight_layout()
     plt.savefig(
         out_dir + label2 + ".pdf",
         transparent=True,
