@@ -1,0 +1,42 @@
+# Maintainer: Carlos Aznarán <caznaranl@uni.pe>
+_base=mesh_hydro_utils
+pkgname=python-${_base//_/-}-git
+pkgdesc="A collection of convenience utilities for the mesh-hydro and hydro-playground codes"
+pkgver=r19.0d7b2ab
+pkgrel=1
+arch=(any)
+url="https://github.com/mladenivkovic/${_base}"
+license=(LGPL-3.0-or-later)
+depends=(python-matplotlib)
+makedepends=(python-build python-installer python-setuptools python-wheel git)
+# checkdepends=(python-pytest)
+source=(git+${url}.git#branch=main)
+sha512sums=('SKIP')
+provides=(python-${_base//_/-})
+conflicts=(python-${_base//_/-})
+
+pkgver() {
+  cd ${_base}
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+}
+
+build() {
+  cd ${_base}
+  python -m build --wheel --skip-dependency-check --no-isolation
+}
+
+check() {
+  cd ${_base}
+  python -m venv --system-site-packages test-env
+  test-env/bin/python -m installer dist/*.whl
+  test-env/bin/python -m pytest ${_base}/tests #-k 'not solutions'
+}
+
+package() {
+  cd ${_base}
+  PYTHONPYCACHEPREFIX="${PWD}/.cache/cpython/" python -m installer --destdir="${pkgdir}" dist/*.whl
+  # # install tutorials
+  # install -d ${pkgdir}/usr/share/${pkgname}
+  # mv notebooks ${pkgdir}/usr/share/${pkgname}
+  # install -Dm 644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}
