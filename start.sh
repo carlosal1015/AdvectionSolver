@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
-DIR=$(pwd)/{build,data,results}
-if [ -d "$DIR" ]; then
-  printf '%s\n' "Removing Lock ($DIR)"
-  rm -rf "$DIR"
+if [ -d "$(pwd)/build" ]; then
+  printf '%s\n' "Removing temporal directory ($pwd/build)"
+  rm -rf build results
 fi
 
-source /opt/intel/oneapi/setvars.sh
+[[ $SETVARS_COMPLETED -ne 1 ]] && source /opt/intel/oneapi/setvars.sh
 cmake -S . -B build
 cmake --build build
-
-# mkdir -p data
 
 pushd build/bin
 ./AdvSolv

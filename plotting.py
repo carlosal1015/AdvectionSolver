@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-from platform import system
-
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -9,8 +7,11 @@ import numpy as np
 def load_data(data_path: str, sources: list):
     x_lst = []
     u_lst = []
+
     for source in sources:
-        x, u = np.loadtxt(data_path + source, skiprows=1, delimiter=",", unpack=True)
+        x, u = np.loadtxt(
+            fname=data_path + source, skiprows=1, delimiter=",", unpack=True
+        )
         x_lst.append(x)
         u_lst.append(u)
     return x_lst, u_lst
@@ -21,19 +22,27 @@ def plot_data(x1, y1, x2, y2, label1, label2, title, out_dir):
     plt.plot(x2, y2, label=label2)
     plt.xlabel(r"Position $x$")
     plt.ylabel(r"Quantity $Q$")
-    plt.title(title)
+    plt.title(label=title)
     plt.grid()
     plt.legend()
-    plt.savefig(out_dir + label2 + ".png", dpi=400)
+    plt.savefig(
+        out_dir + label2 + ".pdf",
+        transparent=True,
+        bbox_inches="tight",
+        dpi=400,
+    )
     plt.close()
     return 0
 
 
 def main():
-    if system == "Windows":
+    from platform import system
+
+    if system() == "Windows":
         data_path = r".\build\bin\\"
-    elif system == "Linux":
+    elif system() == "Linux":
         data_path = r"build/bin/"
+
     out_dir = "results/"
     sources = [
         "custom_analytical.txt",
@@ -64,24 +73,25 @@ def main():
     for i in range(3, len(sources)):
         title = "Comparison between " + labels[i - 3] + " and analytical solution"
         plot_data(
-            x_lst[2],
-            u_lst[2],
-            x_lst[i],
-            u_lst[i],
-            "Analytical solution",
-            labels[i - 3],
-            title,
-            out_dir,
+            x1=x_lst[2],
+            y1=u_lst[2],
+            x2=x_lst[i],
+            y2=u_lst[i],
+            label1="Analytical solution",
+            label2=labels[i - 3],
+            title=title,
+            out_dir=out_dir,
         )
+
     plot_data(
-        x_lst[0],
-        u_lst[0],
-        x_lst[1],
-        u_lst[1],
-        "Analytical solution",
-        "Upwind_custom",
-        "Comparison between upwind and analytical for custom dist",
-        out_dir,
+        x1=x_lst[0],
+        y1=u_lst[0],
+        x2=x_lst[1],
+        y2=u_lst[1],
+        label1="Analytical solution",
+        label2="Upwind_custom",
+        title="Comparison between upwind and analytical for custom dist",
+        out_dir=out_dir,
     )
 
 

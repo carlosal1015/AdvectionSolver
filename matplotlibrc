@@ -1,6 +1,9 @@
-figure.autolayout:True
-font.family: serif
-font.serif: Computer Modern
-text.latex.preamble: "\usepackage{mathtools}"
-text.usetex: True
+figure.autolayout: True
 figure.dpi: 750
+font.family: serif
+font.serif: DejaVu Math TeX Gyre
+mathtext.fontset: cm
+mathtext.rm: serif
+savefig.dpi: 750
+text.latex.preamble: \usepackage{mathtools} \usepackage{diffcoeff}
+text.usetex: True

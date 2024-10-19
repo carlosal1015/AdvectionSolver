@@ -17,3 +17,4 @@ data
 .venv
 .ruff_cache
 *.png
+*.pdf
