@@ -13,7 +13,7 @@ the 1D adv. eq.
 - Adjustments of simulation parameters like grid size and Courant number to see
   their effect on the quality of the solution.
 - Periodic boundary conditions.
-- Custom initial conditions $q\left(t=0, x\right)$ or a test problem that includes
+- Custom initial conditions $q\left(x, t=0\right)$ or a test problem that includes
   discontinuities as well as a wave.
 
 ## Slope- and Fluxlimiters

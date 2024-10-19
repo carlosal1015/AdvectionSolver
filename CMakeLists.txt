@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30.3)
+cmake_minimum_required(VERSION 3.30.5)
 project("AdvectionSolver"
   VERSION 1.0
   DESCRIPTION "A simple C++ advection solver based on michaelschoellhorn/AdvectionSolver"

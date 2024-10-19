@@ -1,21 +1,21 @@
 #pragma once
 
 #include <algorithm>
-#include <vector>
 #include <cmath>
+#include <vector>
 
 class fluxes {
 public:
   int M;
-  double delta_t;
-  double delta_x;
-  double sigma;
+  double Δt;
+  double Δx;
+  double σ;
   std::vector<double> u;
   std::vector<double> slope;
   std::vector<double> flux; // at the moment only used for mc, rest is
                             // calculated via slopes or directly
 public:
-  fluxes(int M, double delta_t, double delta_x, double sigma); // constructor
+  fluxes(int M, double Δt, double Δx, double σ); // constructor
   fluxes();
 
   void upwind(std::vector<double> u_new);

@@ -4,13 +4,13 @@
 constexpr double PI = std::numbers::pi;
 
 // constructor for class simulation
-simulation::simulation(double sigma, int grid_len) : fluxes()
+simulation::simulation(double σ, int grid_len) : fluxes()
 {
-  this->sigma = sigma;
+  this->σ = σ;
   // choosing default computation domain of [0, 2]
   this->xmin = -1.0;
-  this->delta_x = 2.0 / double(grid_len);
-  delta_t = this->sigma * this->delta_x;
+  this->Δx = 2.0 / double(grid_len);
+  Δt = this->σ * this->Δx;
   this->M = grid_len + 4; // length of grid +2 borders on each side
 
   // initialize grid quantities
@@ -20,7 +20,7 @@ simulation::simulation(double sigma, int grid_len) : fluxes()
 
   // set q(x, t=0)
   for (unsigned int i = 0; i < u.size(); i++) {
-    double x = ((i - 2) * this->delta_x - 1.0);
+    double x = ((i - 2) * this->Δx - 1.0);
     if ((-2.0 / 3.0 < x) & (x < -1.0 / 3.0)) {
       this->u[i] = 1.0;
     }
@@ -31,18 +31,18 @@ simulation::simulation(double sigma, int grid_len) : fluxes()
   }
 }
 
-simulation::simulation(double sigma, double xmin, double xmax,
+simulation::simulation(double σ, double xmin, double xmax,
                        std::vector<double> initialDistribution)
     : fluxes()
 {
   // set simualtion and fluxes basic attributes
   this->xmin = xmin;
-  this->sigma = sigma;
-  this->delta_x = (xmax - xmin) / double(initialDistribution.size() - 1);
+  this->σ = σ;
+  this->Δx = (xmax - xmin) / double(initialDistribution.size() - 1);
   this->M =
       initialDistribution.size() + 4; // length of grid +2 borders on each side
   // get timestep
-  delta_t = this->sigma * this->delta_x;
+  Δt = this->σ * this->Δx;
 
   // set q(x, t=0)
   this->u = initialDistribution;
@@ -71,8 +71,8 @@ void simulation::print_att()
       << "------------------------------------------\nAttributes of current "
          "simulation class are:\n";
   std::cout << "\nActive gridpoints:  " << M - 4 << std::endl;
-  std::cout << "delta_t:  " << delta_t << std::endl;
-  std::cout << "delta_x:  " << delta_x << std::endl;
+  std::cout << "Δt:  " << Δt << std::endl;
+  std::cout << "Δx:  " << Δx << std::endl;
   /*cout << "u:  [" ;
   for (auto & it : u){
       cout << it << ", ";
@@ -117,21 +117,21 @@ void simulation::iterate(std::string iterator, double t_end)
       // set border conditions
       bord_con();
       // update timestep
-      t += delta_t;
+      t += Δt;
     }
   }
 }
 
 void simulation::save_data(std::string file_name)
 {
-  // method to save M, sigma, as well as x and u data of current timestep in txt
+  // method to save M, σ, as well as x and u data of current timestep in txt
   // file
   std::cout << "Saving data..." << std::endl;
   std::ofstream myfile;
   myfile.open(file_name);
-  myfile << M << ", " << sigma << "\n";
+  myfile << M << ", " << σ << "\n";
   for (size_t i = 2; i < u.size() - 1; ++i) {
-    myfile << xmin + delta_x * (i - 2) << ", " << u[i] << "\n";
+    myfile << xmin + Δx * (i - 2) << ", " << u[i] << "\n";
   }
   myfile.close();
   std::cout << "success!" << std::endl;

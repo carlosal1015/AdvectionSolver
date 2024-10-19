@@ -3,12 +3,12 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python>=3.12.5
+  - python>=3.12.7
   - clang-format>=18.1.8
   - matplotlib>=3.9.2
-  - mdformat>=0.7.17
+  - mdformat>=0.7.18
   - mypy>=1.11.2
   - pip>=24.2
-  - ruff>=0.6.2
+  - ruff>=0.7.0
   - pip:
       - mdformat-ruff>=0.1.3
