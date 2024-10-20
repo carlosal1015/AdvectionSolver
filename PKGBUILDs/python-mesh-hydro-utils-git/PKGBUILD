@@ -47,5 +47,6 @@ package() {
   # install scripts
   install -d ${pkgdir}/usr/share/${pkgname}
   mv scripts ${pkgdir}/usr/share/${pkgname}
+  mv testing ${pkgdir}/usr/share/${pkgname}
   install -Dm 644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }
