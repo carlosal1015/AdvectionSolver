@@ -1,0 +1,27 @@
+pkgbase = python-mesh-hydro-utils-git
+	pkgdesc = A collection of convenience utilities for the mesh-hydro and hydro-playground codes
+	pkgver = r19.0d7b2ab
+	pkgrel = 1
+	url = https://github.com/mladenivkovic/mesh_hydro_utils
+	arch = any
+	license = GPL-3.0-or-later
+	checkdepends = python-h5py
+	checkdepends = texlive-latexextra
+	checkdepends = texlive-fontsrecommended
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-setuptools
+	makedepends = python-wheel
+	makedepends = git
+	depends = python-matplotlib
+	optdepends = python-h5py: for create HDF5 file
+	provides = python-mesh-hydro-utils
+	conflicts = python-mesh-hydro-utils
+	source = git+https://github.com/mladenivkovic/mesh_hydro_utils.git#branch=main
+	source = license.patch::https://github.com/mladenivkovic/mesh_hydro_utils/pull/1.patch
+	source = numpy2.patch::https://github.com/mladenivkovic/mesh_hydro_utils/pull/2.patch
+	sha512sums = SKIP
+	sha512sums = 4ae5eb3772a6cc9fa41fd16d82cf9f1758f6433a5d946fb46105ccac140e77a825521052834005c8675525d11df2f78e3db7ade8a5c0d8a45cd24f986dc25887
+	sha512sums = 862fa8955ac54bcc890ac41db1c279cb796b901494e5867402fcf26a810e17ca4a4e188326535303e9d598acc8a50c0c51f42cf0ac0fb1767024dacee4193b7f
+
+pkgname = python-mesh-hydro-utils-git

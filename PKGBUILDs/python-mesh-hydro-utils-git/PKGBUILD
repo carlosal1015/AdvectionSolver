@@ -10,6 +10,7 @@ license=(GPL-3.0-or-later)
 depends=(python-matplotlib)
 makedepends=(python-build python-installer python-setuptools python-wheel git)
 checkdepends=(python-h5py texlive-latexextra texlive-fontsrecommended)
+optdepends=('python-h5py: for create HDF5 file')
 source=(git+${url}.git#branch=main
   license.patch::${url}/pull/1.patch
   numpy2.patch::${url}/pull/2.patch)
@@ -43,5 +44,8 @@ check() {
 package() {
   cd ${_base}
   PYTHONPYCACHEPREFIX="${PWD}/.cache/cpython/" python -m installer --destdir="${pkgdir}" dist/*.whl
+  # install scripts
+  install -d ${pkgdir}/usr/share/${pkgname}
+  mv scripts ${pkgdir}/usr/share/${pkgname}
   install -Dm 644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }
